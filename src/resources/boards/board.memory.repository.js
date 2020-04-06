@@ -1,6 +1,6 @@
 const boardItems = [
   {
-    id: '0',
+    id: '1',
     title: 'Project1',
     columns: [
       {
@@ -58,4 +58,12 @@ const getAll = async () => {
   return boardItems;
 };
 
-module.exports = { getAll };
+const getBoard = async id => {
+  const board = boardItems.find(element => element.id === id);
+  if (!board) {
+    return;
+  }
+  return board;
+};
+
+module.exports = { getAll, getBoard };

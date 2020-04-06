@@ -8,4 +8,17 @@ router.route('/').get(async (req, res) => {
   res.json(boards.map(Board.toResponse));
 });
 
+router.route('/:id').get(async (req, res) => {
+  boardsService
+    .getBoard(req.params.id)
+    .then(board =>
+      !board
+        ? res.status(404).send('Board not found')
+        : res.json(Board.toResponse(board))
+    )
+    .catch(() => {
+      res.status(400).send('Bad request');
+    });
+});
+
 module.exports = router;

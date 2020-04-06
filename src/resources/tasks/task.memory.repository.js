@@ -31,6 +31,7 @@ const taskItems = [
 const getAll = async boardId => {
   // TODO: mock implementation. should be replaced during task development
   return taskItems.filter(item => item.boardId === boardId);
+  // return taskItems;
 };
 
 module.exports = { getAll };
