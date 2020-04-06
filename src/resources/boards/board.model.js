@@ -3,19 +3,25 @@ const uuid = require('uuid');
 class Board {
   constructor({
     id = uuid(),
-    name = 'BOARD',
-    login = 'user',
-    password = 'P@55w0rd'
+    title = 'BOARD',
+    order = 'board',
+    description = 'description',
+    userId = 'userId',
+    boardId = 'boardId',
+    columnId = 'columnId'
   } = {}) {
     this.id = id;
-    this.name = name;
-    this.login = login;
-    this.password = password;
+    this.title = title;
+    this.order = order;
+    this.description = description;
+    this.userId = userId;
+    this.boardId = boardId;
+    this.columnId = columnId;
   }
 
-  static toResponse(user) {
-    const { id, name, login } = user;
-    return { id, name, login };
+  static toResponse(board) {
+    const { id, title, order } = board;
+    return { id, title, order };
   }
 }
 
