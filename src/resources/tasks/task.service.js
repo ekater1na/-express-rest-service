@@ -2,4 +2,6 @@ const tasksRepo = require('./task.memory.repository');
 
 const getAll = () => tasksRepo.getAll();
 
-module.exports = { getAll };
+const getTask = id => tasksRepo.getTask(id);
+
+module.exports = { getAll, getTask };

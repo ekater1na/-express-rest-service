@@ -34,4 +34,12 @@ const getAll = async boardId => {
   // return taskItems;
 };
 
-module.exports = { getAll };
+const getTask = async id => {
+  const task = taskItems.find(element => element.id === id);
+  if (!task) {
+    return;
+  }
+  return task;
+};
+
+module.exports = { getAll, getTask };
