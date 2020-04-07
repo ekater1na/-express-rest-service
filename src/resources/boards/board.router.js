@@ -47,10 +47,4 @@ router.route('/:id').put(async (req, res) => {
     });
 });
 
-// router.route('/').delete('/:id', async (req, res) => {
-//   const target = await category.delete(req.params.id);
-
-//   res.send(target);
-// });
-
 module.exports = router;
