@@ -77,4 +77,13 @@ const postBoard = async board => {
   return board;
 };
 
-module.exports = { getAll, getBoard, postBoard };
+const putBoard = async (id, board) => {
+  if (!board.title || !board.columns) {
+    return;
+  }
+  const index = boardItems.findIndex(element => element.id === id);
+  boardItems[index] = board;
+  return boardItems[index];
+};
+
+module.exports = { getAll, getBoard, postBoard, putBoard };

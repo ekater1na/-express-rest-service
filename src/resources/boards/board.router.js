@@ -34,4 +34,23 @@ router.route('/').post(async (req, res) => {
     });
 });
 
+router.route('/:id').put(async (req, res) => {
+  boardsService
+    .putBoard(req.params.id, req.body)
+    .then(board =>
+      !board
+        ? res.status(404).send('Board not found')
+        : res.json(Board.toResponse(board))
+    )
+    .catch(() => {
+      res.status(400).send('Bad request');
+    });
+});
+
+// router.route('/').delete('/:id', async (req, res) => {
+//   const target = await category.delete(req.params.id);
+
+//   res.send(target);
+// });
+
 module.exports = router;

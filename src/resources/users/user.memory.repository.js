@@ -24,12 +24,4 @@ const getAll = async () => {
   return UserItems;
 };
 
-const getUser = async id => {
-  const user = UserItems.find(element => element.id === id);
-  if (!user) {
-    return;
-  }
-  return user;
-};
-
-module.exports = { getAll, getUser };
+module.exports = { getAll };
