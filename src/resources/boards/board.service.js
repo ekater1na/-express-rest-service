@@ -4,4 +4,6 @@ const getAll = () => boardsRepo.getAll();
 
 const getBoard = id => boardsRepo.getBoard(id);
 
-module.exports = { getAll, getBoard };
+const postBoard = board => boardsRepo.postBoard(board);
+
+module.exports = { getAll, getBoard, postBoard };

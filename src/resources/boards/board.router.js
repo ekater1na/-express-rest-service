@@ -21,4 +21,17 @@ router.route('/:id').get(async (req, res) => {
     });
 });
 
+router.route('/').post(async (req, res) => {
+  boardsService
+    .postBoard(req.body)
+    .then(board =>
+      !board
+        ? res.status(404).send('Board not found')
+        : res.json(Board.toResponse(board))
+    )
+    .catch(() => {
+      res.status(400).send('Bad request');
+    });
+});
+
 module.exports = router;

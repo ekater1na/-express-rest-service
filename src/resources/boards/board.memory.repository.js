@@ -1,3 +1,5 @@
+const uuid = require('uuid');
+
 const boardItems = [
   {
     id: '1',
@@ -66,4 +68,13 @@ const getBoard = async id => {
   return board;
 };
 
-module.exports = { getAll, getBoard };
+const postBoard = async board => {
+  if (!board.title || !board.columns) {
+    return;
+  }
+  board.id = uuid();
+  boardItems.push(board);
+  return board;
+};
+
+module.exports = { getAll, getBoard, postBoard };
