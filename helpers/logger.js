@@ -6,19 +6,25 @@ const logger = createLogger({
   transports: [
     new transports.Console(),
     new transports.File({
-      filename: 'errors/error.log',
+      filename: 'logs/error.log',
       level: 'error',
       format: format.combine(format.uncolorize(), format.json())
     }),
     new transports.File({
-      filename: 'errors/info.log',
+      filename: 'logs/info.log',
       level: 'info',
       format: format.combine(format.uncolorize(), format.json())
     })
   ],
   exceptionHandlers: [
     new transports.File({
-      filename: 'errors/exceptions.log',
+      filename: 'logs/exceptions.log',
+      format: format.combine(format.uncolorize(), format.json())
+    })
+  ],
+  unhandledRejection: [
+    new transports.File({
+      filename: 'logs/unhandled.log',
       format: format.combine(format.uncolorize(), format.json())
     })
   ]

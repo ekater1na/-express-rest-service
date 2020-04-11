@@ -2,6 +2,8 @@ const express = require('express');
 const swaggerUI = require('swagger-ui-express');
 const path = require('path');
 const YAML = require('yamljs');
+const logger = require('../helpers/logger');
+
 const boardRouter = require('./resources/boards/board.router');
 const taskRouter = require('./resources/tasks/task.router');
 const userRouter = require('./resources/users/user.router');
@@ -14,6 +16,12 @@ app.use(express.json());
 app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use('/', (req, res, next) => {
+  const route = req.url.split('/')[1];
+  if (route !== 'users' && route !== 'boards') {
+    const { url, method, params, body } = req;
+    const message = JSON.stringify({ url, method, params, body });
+    logger.log('info', message);
+  }
   if (req.originalUrl === '/') {
     res.send('Service is running!');
     return;
