@@ -21,13 +21,13 @@ const logger = createLogger({
       filename: 'logs/exceptions.log',
       format: format.combine(format.uncolorize(), format.json())
     })
+  ],
+  unhandledRejection: [
+    new transports.File({
+      filename: 'logs/unhandled.log',
+      format: format.combine(format.uncolorize(), format.json())
+    })
   ]
-  //   unhandledRejection: [
-  //     new transports.File({
-  //       filename: 'logs/unhandled.log',
-  //       format: format.combine(format.uncolorize(), format.json())
-  //     })
-  //   ]
 });
 
 module.exports = { logger };
