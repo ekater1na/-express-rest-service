@@ -1,6 +1,7 @@
 const { PORT } = require('./common/config');
 const app = require('./app');
 const logger = require('../helpers/logger');
+const exit = process.exit;
 
 process
   .on('unhandledRejection', err => {
@@ -8,7 +9,6 @@ process
   })
   .on('uncaughtException', err => {
     logger(err.message, 'Uncaught Exception');
-    const { exit } = process;
     exit(1);
   });
 

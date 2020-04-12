@@ -8,18 +8,30 @@ const logger = createLogger({
     new transports.File({
       filename: 'logs/error.log',
       level: 'error',
-      format: format.combine(format.uncolorize(), format.json())
+      format: format.combine(
+        format.uncolorize(),
+        format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+        format.json()
+      )
     }),
     new transports.File({
       filename: 'logs/info.log',
       level: 'info',
-      format: format.combine(format.uncolorize(), format.json())
+      format: format.combine(
+        format.uncolorize(),
+        format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+        format.json()
+      )
     })
   ],
   exceptionHandlers: [
     new transports.File({
       filename: 'logs/exceptions.log',
-      format: format.combine(format.uncolorize(), format.json())
+      format: format.combine(
+        format.uncolorize(),
+        format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+        format.json()
+      )
     })
   ]
 });
