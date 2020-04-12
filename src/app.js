@@ -7,6 +7,7 @@ const logger = require('../helpers/logger');
 const boardRouter = require('./resources/boards/board.router');
 const taskRouter = require('./resources/tasks/task.router');
 const userRouter = require('./resources/users/user.router');
+const handleError = require('../helpers/error-handling');
 
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
@@ -34,5 +35,9 @@ app.use('/boards', boardRouter);
 app.use('/tasks', taskRouter);
 
 app.use('/users', userRouter);
+
+app.use((err, req, res) => {
+  handleError(err, res);
+});
 
 module.exports = app;
