@@ -2,12 +2,11 @@ const usersRepo = require('./user.db.repository');
 
 const getAll = () => usersRepo.getAll();
 
-module.exports = { getAll };
+const add = id => usersRepo.add(id);
 
-// module.exports = {
-//   getAll,
-//   pushNew: usersRepo.pushNew,
-//   getById: usersRepo.getById,
-//   update: usersRepo.update,
-//   remove: usersRepo.remove
-// };
+const update = (id, userToUpdate) => usersRepo.update(id, userToUpdate);
+
+// const putBoard = (id, board) => usersRepo.putBoard(id, board);
+
+module.exports = { getAll, add, update };
+// module.exports = { getAll, getById, getUserByProps, add, update, deleteById };

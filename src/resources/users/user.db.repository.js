@@ -1,44 +1,27 @@
-/* eslint-disable no-unused-vars */
-const users = [...require('../../db/db.client').users];
+const User = require('./user.model');
 
 const getAll = async () => {
-  throw new Error();
+  return User.find({});
 };
 
 const getById = async id => {
-  throw new Error();
-  //   users.find(user => user.id === id);
+  return User.findById(id);
 };
 
 const getUserByProps = async props => {
-  throw new Error();
-
-  // user.find(user => {
-  //     for (const key in props) {
-  //         if (props.hasOwnProperty(key)) {
-  //             if (user[key] != props[key]) {
-  //                 return false;
-  //             }
-  //         }
-  //     }
-
-  //     return true;
-  // });
+  return User.find(props);
 };
 
 const add = async user => {
-  throw new Error();
-  //   users.push(user);
-  //   return user;
+  return User.create(user);
 };
 
 const update = async userToUpdate => {
-  throw new Error();
-  // let userToUpdate = null;
+  return User.updateOne({ _id: userToUpdate.id });
 };
 
 const deleteById = async id => {
-  throw new Error();
+  return (await User.deleteOne({ _id: id })).deletedCount;
 };
 
 module.exports = { getAll, getById, getUserByProps, add, update, deleteById };
