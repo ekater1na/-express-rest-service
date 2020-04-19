@@ -1,17 +1,11 @@
-class ErrorHandler extends Error {
-  constructor(statusCode, message) {
-    super();
-    this.statusCode = statusCode;
-    this.message = message;
-  }
-}
-const handleError = (err, res) => {
-  const { statusCode, message } = err;
-  res.status(statusCode).json({
-    status: 'error',
-    statusCode,
-    message
-  });
+const HttpStatus = require('http-status-codes');
+
+const logger = require('./logger');
+
+const errorHandler = async (err, req, res, next) => {
+  logger.error(err.stack);
+  res.status(HttpStatus.INTERNAL_SERVER_ERROR).send('Something broke!');
+  next();
 };
 
-module.exports = { ErrorHandler, handleError };
+module.exports = errorHandler;

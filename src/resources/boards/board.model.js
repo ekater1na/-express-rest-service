@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 const uuid = require('uuid');
-const Column = require('../columns/column.model');
 
 const boardSchema = new mongoose.Schema(
   {
     title: String,
-    column: [Column],
+    postedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Column' },
+    columns: [
+      { title: String, order: Number, by: mongoose.Schema.Types.ObjectId }
+    ],
     _id: {
       type: String,
       default: uuid
