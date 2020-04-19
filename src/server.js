@@ -1,6 +1,6 @@
 const connectToDb = require('./db/db.client');
 const app = require('./app');
-const logger = require('../helpers/logger');
+const logger = require('./helpers/logger');
 const { PORT } = require('./common/config');
 
 connectToDb(() => {
