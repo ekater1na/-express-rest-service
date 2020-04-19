@@ -1,17 +1,20 @@
-const { PORT } = require('./common/config');
+const connectToDb = require('./db/db.client');
 const app = require('./app');
-const logger = require('../helpers/logger');
-const exit = process.exit;
+const logger = require('./helpers/logger');
+const { PORT } = require('./common/config');
 
-process
-  .on('unhandledRejection', err => {
-    logger(err.message, 'Unhandled rejection detected');
-  })
-  .on('uncaughtException', err => {
-    logger(err.message, 'Uncaught Exception');
-    exit(1);
-  });
+connectToDb(() => {
+  app.listen(PORT, () =>
+    console.log(`App is running on http://localhost:${PORT}`)
+  );
+});
 
-app.listen(PORT, () =>
-  console.log(`App is running on http://localhost:${PORT}`)
-);
+process.on('uncaughtException', error => {
+  logger.log('error', `Captured error: ${error.message}`);
+  throw error;
+});
+
+process.on('unhandledRejection', reason => {
+  logger.log('error', `Unhandled rejection detected: ${reason.message}`);
+  throw reason;
+});

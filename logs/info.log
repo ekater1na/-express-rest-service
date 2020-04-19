@@ -1,0 +1,28 @@
+{"message":"    info","level":"info"}
+{"message":"    warn","level":"warn"}
+{"message":"   error","level":"error"}
+{"level":"info","message":"    info from log"}
+{"message":"    info","level":"info"}
+{"message":"    warn","level":"warn"}
+{"message":"   error","level":"error"}
+{"level":"info","message":"    info from log"}
+{"message":"    info","level":"info"}
+{"message":"    warn","level":"warn"}
+{"message":"   error","level":"error"}
+{"level":"info","message":"    info from log"}
+{"message":"   captured error: Cannot read property 'forEach' of undefined","level":"error","timestamp":"2020-04-19 15:08:02"}
+{"message":"   captured error: Cannot read property 'forEach' of undefined","level":"error","timestamp":"2020-04-19 15:08:16"}
+{"message":"   captured error: Cannot read property 'forEach' of undefined","level":"error","timestamp":"2020-04-19 15:11:46"}
+{"message":"   captured error: Cannot read property 'forEach' of undefined","level":"error","timestamp":"2020-04-19 15:13:04"}
+{"message":"   Unhandled rejection detected: ","level":"error","timestamp":"2020-04-19 15:14:41"}
+{"message":"   Unhandled rejection detected: ","level":"error","timestamp":"2020-04-19 15:44:58"}
+{"message":"   Unhandled rejection detected: ","level":"error","timestamp":"2020-04-19 15:46:56"}
+{"message":"   Unhandled rejection detected: Cannot create collection test.users - database is in the process of being dropped.","level":"error","timestamp":"2020-04-19 15:50:44"}
+{"message":"   Unhandled rejection detected: ","level":"error","timestamp":"2020-04-19 15:51:06"}
+{"message":"   Unhandled rejection detected: ","level":"error","timestamp":"2020-04-19 15:54:47"}
+{"message":"   Unhandled rejection detected: ","level":"error","timestamp":"2020-04-19 15:56:43"}
+{"message":"   Unhandled rejection detected: ","level":"error","timestamp":"2020-04-19 15:58:30"}
+{"message":"   Unhandled rejection detected: ","level":"error","timestamp":"2020-04-19 16:07:14"}
+{"message":"   Unhandled rejection detected: Cannot create collection test.users - database is in the process of being dropped.","level":"error","timestamp":"2020-04-19 16:14:05"}
+{"message":"   Unhandled rejection detected: Cannot create collection test.users - database is in the process of being dropped.","level":"error","timestamp":"2020-04-19 16:32:09"}
+{"message":"   Unhandled rejection detected: Cannot create collection test.users - database is in the process of being dropped.","level":"error","timestamp":"2020-04-19 16:45:09"}

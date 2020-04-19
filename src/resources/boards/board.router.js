@@ -1,50 +1,56 @@
 const router = require('express').Router();
-const Board = require('./board.model');
+const taskRouter = require('../tasks/task.router.js');
 const boardsService = require('./board.service');
+const catchErrors = require('../../helpers/catchErrors');
+const createError = require('http-errors');
+const Board = require('./board.model');
 
 router.route('/').get(async (req, res) => {
   const boards = await boardsService.getAll();
-  // map user fields to exclude secret fields like "password"
-  res.json(boards.map(Board.toResponse));
+  return res.status(200).json(boards.map(Board.toResponse));
 });
 
-router.route('/:id').get(async (req, res) => {
-  boardsService
-    .getBoard(req.params.id)
-    .then(board =>
-      !board
-        ? res.status(404).send('Board not found')
-        : res.json(Board.toResponse(board))
-    )
-    .catch(() => {
-      res.status(400).send('Bad request');
-    });
-});
+router.route('/:id').get(
+  catchErrors(async (req, res) => {
+    const board = await boardsService.getById(req.params.id);
+    if (!board) {
+      throw createError(404, `Board '${req.params.id}' not found`);
+    }
+    return res.status(200).json(Board.toResponse(board));
+  })
+);
 
-router.route('/').post(async (req, res) => {
-  boardsService
-    .postBoard(req.body)
-    .then(board =>
-      !board
-        ? res.status(404).send('Board not found')
-        : res.json(Board.toResponse(board))
-    )
-    .catch(() => {
-      res.status(400).send('Bad request');
-    });
-});
+router.route('/:id').put(
+  catchErrors(async (req, res) => {
+    const board = await boardsService.update(req.params.id, req.body);
+    if (!board) {
+      throw createError(404, `Board '${req.params.id}' not found`);
+    }
+    return res.status(200).json(board);
+  })
+);
 
-router.route('/:id').put(async (req, res) => {
-  boardsService
-    .putBoard(req.params.id, req.body)
-    .then(board =>
-      !board
-        ? res.status(404).send('Board not found')
-        : res.json(Board.toResponse(board))
-    )
-    .catch(() => {
-      res.status(400).send('Bad request');
-    });
-});
+router.route('/').post(
+  catchErrors(async (req, res) => {
+    const board = await boardsService.add(req.body);
+    return res.status(200).json(Board.toResponse(board));
+  })
+);
+
+router.route('/:id').delete(
+  catchErrors(async (req, res) => {
+    const message = await boardsService.deleteById(req.params.id);
+    return res.status(204).json({ message });
+  })
+);
+
+router.use(
+  '/:boardId/tasks',
+  (req, res, next) => {
+    req.boardId = req.params.boardId;
+    next();
+  },
+  taskRouter
+);
 
 module.exports = router;

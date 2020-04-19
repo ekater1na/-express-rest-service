@@ -68,7 +68,7 @@ const getBoard = async id => {
   return board;
 };
 
-const postBoard = async board => {
+const add = async board => {
   if (!board.title || !board.columns) {
     return;
   }
@@ -77,7 +77,7 @@ const postBoard = async board => {
   return board;
 };
 
-const putBoard = async (id, board) => {
+const update = async (id, board) => {
   if (!board.title || !board.columns) {
     return;
   }
@@ -86,4 +86,4 @@ const putBoard = async (id, board) => {
   return boardItems[index];
 };
 
-module.exports = { getAll, getBoard, postBoard, putBoard };
+module.exports = { getAll, getBoard, add, update };
