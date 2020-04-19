@@ -10,11 +10,11 @@ connectToDb(() => {
 });
 
 process.on('uncaughtException', error => {
-  logger.error(`captured error: ${error.message}`);
-  process.exitCode = 1;
+  logger.log('error', `Captured error: ${error.message}`);
+  throw error;
 });
 
 process.on('unhandledRejection', reason => {
-  logger.error(`Unhandled rejection detected: ${reason.message}`);
+  logger.log('error', `Unhandled rejection detected: ${reason.message}`);
   throw reason;
 });
