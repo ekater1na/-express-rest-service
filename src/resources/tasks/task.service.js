@@ -6,7 +6,7 @@ const add = board => tasksRepo.add(board);
 const update = (id, board) => tasksRepo.update(id, board);
 const deleteById = () => tasksRepo.deleteById();
 const deleteByBoard = boardId => tasksRepo.deleteTaskByBoard(boardId);
-const nullByUser = userId => tasksRepo.nullTaskByUser(userId);
+const nullByUser = userId => tasksRepo.nullByUser(userId);
 
 module.exports = {
   getAll,
