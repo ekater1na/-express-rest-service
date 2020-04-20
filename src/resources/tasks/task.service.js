@@ -1,11 +1,12 @@
 const tasksRepo = require('./task.db.repository');
 
-const getAll = () => tasksRepo.getAll();
-const getById = id => tasksRepo.getById(id);
-const add = board => tasksRepo.add(board);
-const update = (id, board) => tasksRepo.update(id, board);
-const deleteById = () => tasksRepo.deleteById();
-const deleteByBoard = boardId => tasksRepo.deleteTaskByBoard(boardId);
+const getAll = boardId => tasksRepo.getAll(boardId);
+const getById = (boardId, taskId) => tasksRepo.getById(boardId, taskId);
+const add = (boardId, task) => tasksRepo.add(boardId, task);
+const update = (boardId, taskId, task) =>
+  tasksRepo.update(boardId, taskId, task);
+const deleteById = taskId => tasksRepo.deleteById(taskId);
+const deleteByBoard = boardId => tasksRepo.deleteByBoard(boardId);
 const nullByUser = userId => tasksRepo.nullByUser(userId);
 
 module.exports = {

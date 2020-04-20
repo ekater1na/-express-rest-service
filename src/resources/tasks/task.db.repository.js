@@ -8,10 +8,6 @@ const getById = async (_boardId, taskId) => {
   return Task.findOne({ _id: taskId, boardId: _boardId });
 };
 
-// const getTaskByProps = async props => {
-//   return Task.find(props);
-// };
-
 const add = async (_boardId, task) => {
   return Task.create({ ...task, boardId: _boardId });
 };
@@ -36,7 +32,6 @@ const nullByUser = async _userId => {
 module.exports = {
   getAll,
   getById,
-  // getTaskByProps,
   add,
   update,
   deleteById,

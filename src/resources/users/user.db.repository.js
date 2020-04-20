@@ -8,20 +8,16 @@ const getById = async id => {
   return User.findById(id);
 };
 
-const getUserByProps = async props => {
-  return User.find(props);
-};
-
 const add = async user => {
   return User.create(user);
 };
 
-const update = async userToUpdate => {
-  return User.updateOne({ _id: userToUpdate.id });
+const update = async (userId, user) => {
+  return User.updateOne({ _id: userId }, user);
 };
 
 const deleteById = async id => {
-  return (await User.deleteOne({ _id: id })).deletedCount;
+  return User.deleteOne({ _id: id });
 };
 
-module.exports = { getAll, getById, getUserByProps, add, update, deleteById };
+module.exports = { getAll, getById, add, update, deleteById };
