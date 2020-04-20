@@ -34,9 +34,7 @@ app.use('/', (req, res, next) => {
 });
 
 app.use('/boards', boardRouter);
-
 app.use('/tasks', taskRouter);
-
 app.use('/users', userRouter);
 
 app.use((req, res, next) => {
