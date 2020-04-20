@@ -7,8 +7,6 @@ const createError = require('http-errors');
 const logger = require('./helpers/logger');
 
 const boardRouter = require('./resources/boards/board.router');
-
-const taskRouter = require('./resources/tasks/task.router');
 const userRouter = require('./resources/users/user.router');
 
 const app = express();
@@ -34,9 +32,7 @@ app.use('/', (req, res, next) => {
 });
 
 app.use('/boards', boardRouter);
-app.use('/tasks', taskRouter);
 app.use('/users', userRouter);
-
 app.use((req, res, next) => {
   next(createError(404, `Not found url: ${req.url}`));
 });

@@ -3,12 +3,12 @@ const uuid = require('uuid');
 
 const columnSchema = new mongoose.Schema(
   {
-    title: String,
-    order: Number,
     _id: {
       type: String,
       default: uuid
-    }
+    },
+    title: String,
+    order: Number
   },
   {
     versionKey: false
