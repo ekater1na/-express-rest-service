@@ -24,7 +24,7 @@ router.route('/:id').get(
 
 router.route('/:id').put(
   catchErrors(async (req, res) => {
-    const isUser = await usersService.add(req.params.id);
+    const isUser = await usersService.getById(req.params.id);
     if (!isUser) {
       throw createError(404, `User '${req.params.id}' not found`);
     }

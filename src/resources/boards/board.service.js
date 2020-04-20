@@ -6,7 +6,7 @@ const getById = id => boardsRepo.getById(id);
 const add = board => boardsRepo.add(board);
 const update = (id, board) => boardsRepo.update(id, board);
 const deleteById = async id => {
-  await boardsRepo.delete(id);
+  await boardsRepo.deleteById(id);
   await tasksService.deleteByBoard(id);
 };
 
