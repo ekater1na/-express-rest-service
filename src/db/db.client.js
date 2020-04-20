@@ -17,52 +17,42 @@ const connectToDb = callback => {
 
   const boards = [
     new Board({
-      id: '1',
       title: 'Project1',
       columns: [
         {
-          id: '1',
           title: 'plan',
           order: '1'
         },
         {
-          id: '2',
           title: 'dev',
           order: '2'
         },
         {
-          id: '3',
           title: 'test',
           order: '3'
         },
         {
-          id: '4',
           title: 'done',
           order: '4'
         }
       ]
     }),
     new Board({
-      id: '2',
       title: 'Project2',
       columns: [
         {
-          id: '1',
           title: 'plan',
           order: '1'
         },
         {
-          id: '2',
           title: 'dev',
           order: '2'
         },
         {
-          id: '3',
           title: 'test',
           order: '3'
         },
         {
-          id: '4',
           title: 'done',
           order: '4'
         }
@@ -72,29 +62,26 @@ const connectToDb = callback => {
 
   const tasks = [
     new Task({
-      id: '1',
       title: 'Task1',
-      order: 'order1',
+      order: '1',
       description: 'description1',
-      userId: 'userId1',
+      userId: '44dea638-7e0a-4b54-8346-2d4297f8fd71',
       boardId: 'boardId1',
       columnId: 'columnId1'
     }),
     new Task({
-      id: '2',
       title: 'Task2',
-      order: 'order2',
+      order: '2',
       description: 'description2',
-      userId: 'userId2',
+      userId: '44dea638-7e0a-4b54-8346-2d4297f8fd71',
       boardId: 'boardId2',
       columnId: 'columnId2'
     }),
     new Task({
-      id: '3',
       title: 'Task3',
-      order: 'order3',
+      order: '3',
       description: 'description3',
-      userId: 'userId3',
+      userId: 'ffc683d9-3350-4be6-b346-43c8a931aa61',
       boardId: 'boardId3',
       columnId: 'columnId3'
     })
@@ -104,7 +91,9 @@ const connectToDb = callback => {
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', () => {
     console.log('Database connected');
-    db.dropDatabase();
+    mongoose.connection.collection('users').drop();
+    mongoose.connection.collection('boards').drop();
+    mongoose.connection.collection('tasks').drop();
     users.forEach(user => user.save());
     boards.forEach(board => board.save());
     tasks.forEach(task => task.save());

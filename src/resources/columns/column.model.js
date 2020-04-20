@@ -22,4 +22,4 @@ columnSchema.statics.toResponse = column => {
 
 const Column = mongoose.model('Column', columnSchema);
 
-module.exports = Column;
+module.exports = { columnSchema, Column };
