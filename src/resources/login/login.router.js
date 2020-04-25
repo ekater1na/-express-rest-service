@@ -1,37 +1,28 @@
 const router = require('express').Router();
-const createError = require('http-errors');
 const catchErrors = require('../../helpers/catchErrors');
-const config = require('../../common/config');
-const loginService = require('./login.service');
-// const bcrypt = require('bcrypt');
+const createError = require('http-errors');
 const jwt = require('jsonwebtoken');
-// const token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+const config = require('../../common/config');
+const loginServices = require('../login/login.service');
 
 router.route('/').post(
   catchErrors(async (req, res) => {
-    const user = await loginService.add(req.body);
+    const user = await loginServices.isUser(req.body.login);
     if (!user) {
       throw createError(403, `User '${JSON.stringify(req.body)}' Forbidden `);
     }
-    user.comparePass(req.body.password, user.password, (err, isMatch) => {
-      if (err) throw err;
-      if (isMatch) {
-        const token = jwt.sign(user.toJSON(), config.secret, {
-          expiresIn: 3600 * 24
-        });
-
-        res.json({
-          success: true,
-          token: `JWT${token}`,
-          user: {
-            id: user._id,
-            name: user.name,
-            login: user.login,
-            email: user.email
-          }
-        });
-      } else return res.json({ success: false, msg: "Passwords don't match" });
+    user.comparePassword(req.body.password, (error, match) => {
+      if (!match) {
+        return res.status(403).send({ message: 'Forbidden' });
+      }
     });
+    const _token = jwt.sign(
+      { login: user.login, userId: user._id },
+      config.JWT_SECRET_KEY
+    );
+    return res
+      .header(config.HTTP_HEADER_Authorization, _token)
+      .send({ token: _token });
   })
 );
 
