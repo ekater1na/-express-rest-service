@@ -6,6 +6,7 @@ const createError = require('http-errors');
 
 const logger = require('./helpers/logger');
 
+const loginRouter = require('./resources/login/login.router');
 const boardRouter = require('./resources/boards/board.router');
 const userRouter = require('./resources/users/user.router');
 
@@ -31,6 +32,7 @@ app.use('/', (req, res, next) => {
   next();
 });
 
+app.use('/login', loginRouter);
 app.use('/boards', boardRouter);
 app.use('/users', userRouter);
 app.use((req, res, next) => {
