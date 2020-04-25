@@ -20,4 +20,8 @@ const deleteById = async id => {
   return User.deleteOne({ _id: id });
 };
 
-module.exports = { getAll, getById, add, update, deleteById };
+const findOneByLogin = async _login => {
+  return User.findOne({ login: _login });
+};
+
+module.exports = { getAll, getById, add, update, deleteById, findOneByLogin };
