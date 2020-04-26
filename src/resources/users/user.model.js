@@ -1,6 +1,7 @@
 const uuid = require('uuid');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const SALT_ROUNDS = require('../../common/config').SALT_ROUNDS;
 
 const userSchema = new mongoose.Schema(
   {
@@ -23,8 +24,14 @@ userSchema.statics.toResponse = user => {
 };
 
 userSchema.pre('save', async function cb(next) {
-  const salt = await bcrypt.genSalt(10);
+  const salt = await bcrypt.genSalt(+SALT_ROUNDS);
   this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+userSchema.pre('findOneAndUpdate', async function cb(next) {
+  const salt = await bcrypt.genSalt(+SALT_ROUNDS);
+  this._update.password = await bcrypt.hash(this._update.password, salt);
   next();
 });
 
