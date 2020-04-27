@@ -9,11 +9,13 @@ const deleteById = async id => {
   await usersRepo.deleteById(id);
   await tasksService.nullByUser(id);
 };
+const findOneByLogin = login => usersRepo.findOneByLogin(login);
 
 module.exports = {
   getAll,
   getById,
   add,
   update,
-  deleteById
+  deleteById,
+  findOneByLogin
 };

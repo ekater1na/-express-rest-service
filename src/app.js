@@ -3,9 +3,11 @@ const swaggerUI = require('swagger-ui-express');
 const path = require('path');
 const YAML = require('yamljs');
 const createError = require('http-errors');
+const verify = require('./resources/login/validation');
 
 const logger = require('./helpers/logger');
 
+const loginRouter = require('./resources/login/login.router');
 const boardRouter = require('./resources/boards/board.router');
 const userRouter = require('./resources/users/user.router');
 
@@ -31,13 +33,14 @@ app.use('/', (req, res, next) => {
   next();
 });
 
-app.use('/boards', boardRouter);
-app.use('/users', userRouter);
+app.use('/login', loginRouter);
+app.use('/boards', verify, boardRouter);
+app.use('/users', verify, userRouter);
 app.use((req, res, next) => {
   next(createError(404, `Not found url: ${req.url}`));
 });
 
-app.use((error, req, res, next) => {
+app.use('*', (error, req, res, next) => {
   logger.log('error', `error: ${error.status} ${error.message}`);
   res.status(error.status || 500);
   res.json({

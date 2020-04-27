@@ -13,11 +13,17 @@ const add = async user => {
 };
 
 const update = async (userId, user) => {
-  return User.updateOne({ _id: userId }, user);
+  return User.findOneAndUpdate({ _id: userId }, user, {
+    new: true
+  });
 };
 
 const deleteById = async id => {
   return User.deleteOne({ _id: id });
 };
 
-module.exports = { getAll, getById, add, update, deleteById };
+const findOneByLogin = async _login => {
+  return User.findOne({ login: _login });
+};
+
+module.exports = { getAll, getById, add, update, deleteById, findOneByLogin };
